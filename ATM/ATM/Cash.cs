@@ -60,16 +60,20 @@ namespace ATM
 
     class Check
     {
-        decimal total;
-        string name;
-        string payTo;
-        public decimal Total { get { return total; } }
-        public string Name { get { return name; } }
-        public string PayTo { get { return payTo; } }
+        public decimal Total { get; }
+        public string Name { get; }
+        public string PayTo { get; }
 
-        public Check(string name)
+        public Check(string n, string p, decimal t)
         {
+            Name = n;
+            PayTo = p;
+            Total = t;
+        }
 
+        public override string ToString()
+        {
+            return $"{Name} -> {PayTo}: {Total}";
         }
     }
 }

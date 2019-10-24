@@ -26,7 +26,7 @@ namespace ATM
 
             return new Cash(0, 0, twenties, tens, 0, 0);
         }
-
+        public Cash RemainingCash { get { return cash; } }
         public void TransferFromReceiver(Cash c)
         {
             cash += c;
@@ -35,6 +35,12 @@ namespace ATM
 
     class Receiver
     {
+        Cash cash;
+
+        public Receiver()
+        {
+            
+        }
         //Add deposit cash to account
         //Returns cash to be transferred to dispoenser
         public Cash Process(Cash c, Account a)

@@ -48,9 +48,36 @@
             this.label7 = new System.Windows.Forms.Label();
             this.personLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.newPersonButton = new System.Windows.Forms.Button();
+            this.customerButton = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.workerButton = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.dTotalLabel = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.d10Label = new System.Windows.Forms.Label();
+            this.d20Label = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.r100Label = new System.Windows.Forms.Label();
+            this.r50Label = new System.Windows.Forms.Label();
+            this.r20Label = new System.Windows.Forms.Label();
+            this.r10Label = new System.Windows.Forms.Label();
+            this.r5Label = new System.Windows.Forms.Label();
+            this.r1Label = new System.Windows.Forms.Label();
+            this.rTotalLabel = new System.Windows.Forms.Label();
             this.personGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // personGroup
@@ -64,7 +91,7 @@
             this.personGroup.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.personGroup.Name = "personGroup";
             this.personGroup.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.personGroup.Size = new System.Drawing.Size(153, 323);
+            this.personGroup.Size = new System.Drawing.Size(171, 323);
             this.personGroup.TabIndex = 0;
             this.personGroup.TabStop = false;
             this.personGroup.Text = "Person";
@@ -108,7 +135,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox1.Size = new System.Drawing.Size(119, 158);
+            this.groupBox1.Size = new System.Drawing.Size(140, 158);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cash on Hand";
@@ -252,8 +279,9 @@
             this.personLabel.Location = new System.Drawing.Point(95, 15);
             this.personLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.personLabel.Name = "personLabel";
-            this.personLabel.Size = new System.Drawing.Size(0, 13);
+            this.personLabel.Size = new System.Drawing.Size(51, 13);
             this.personLabel.TabIndex = 1;
+            this.personLabel.Text = "Customer";
             // 
             // label1
             // 
@@ -265,23 +293,278 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Type of Person:";
             // 
-            // newPersonButton
+            // customerButton
             // 
-            this.newPersonButton.Location = new System.Drawing.Point(9, 337);
-            this.newPersonButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.newPersonButton.Name = "newPersonButton";
-            this.newPersonButton.Size = new System.Drawing.Size(91, 19);
-            this.newPersonButton.TabIndex = 2;
-            this.newPersonButton.Text = "New Person";
-            this.newPersonButton.UseVisualStyleBackColor = true;
-            this.newPersonButton.Click += new System.EventHandler(this.newPersonButton_Click);
+            this.customerButton.Location = new System.Drawing.Point(9, 337);
+            this.customerButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.customerButton.Name = "customerButton";
+            this.customerButton.Size = new System.Drawing.Size(91, 24);
+            this.customerButton.TabIndex = 2;
+            this.customerButton.Text = "New Customer";
+            this.customerButton.UseVisualStyleBackColor = true;
+            this.customerButton.Click += new System.EventHandler(this.newPersonButton_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.groupBox4);
+            this.groupBox2.Controls.Add(this.groupBox3);
+            this.groupBox2.Location = new System.Drawing.Point(533, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(142, 342);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "ATM";
+            // 
+            // workerButton
+            // 
+            this.workerButton.Location = new System.Drawing.Point(105, 338);
+            this.workerButton.Name = "workerButton";
+            this.workerButton.Size = new System.Drawing.Size(75, 23);
+            this.workerButton.TabIndex = 4;
+            this.workerButton.Text = "New Worker";
+            this.workerButton.UseVisualStyleBackColor = true;
+            this.workerButton.Click += new System.EventHandler(this.workerButton_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.rTotalLabel);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.r1Label);
+            this.groupBox3.Controls.Add(this.r5Label);
+            this.groupBox3.Controls.Add(this.r10Label);
+            this.groupBox3.Controls.Add(this.r20Label);
+            this.groupBox3.Controls.Add(this.r50Label);
+            this.groupBox3.Controls.Add(this.r100Label);
+            this.groupBox3.Controls.Add(this.label18);
+            this.groupBox3.Controls.Add(this.label19);
+            this.groupBox3.Controls.Add(this.label20);
+            this.groupBox3.Controls.Add(this.label21);
+            this.groupBox3.Controls.Add(this.label22);
+            this.groupBox3.Controls.Add(this.label23);
+            this.groupBox3.Location = new System.Drawing.Point(6, 88);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Size = new System.Drawing.Size(119, 158);
+            this.groupBox3.TabIndex = 10;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Cash in Receiver";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(4, 98);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(34, 13);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Total:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(4, 84);
+            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(22, 13);
+            this.label18.TabIndex = 4;
+            this.label18.Text = "$1:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(4, 70);
+            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(22, 13);
+            this.label19.TabIndex = 5;
+            this.label19.Text = "$5:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(4, 42);
+            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(28, 13);
+            this.label20.TabIndex = 6;
+            this.label20.Text = "$20:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(4, 28);
+            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(28, 13);
+            this.label21.TabIndex = 7;
+            this.label21.Text = "$50:";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(4, 56);
+            this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(28, 13);
+            this.label22.TabIndex = 3;
+            this.label22.Text = "$10:";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(4, 15);
+            this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(34, 13);
+            this.label23.TabIndex = 8;
+            this.label23.Text = "$100:";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.dTotalLabel);
+            this.groupBox4.Controls.Add(this.label12);
+            this.groupBox4.Controls.Add(this.d10Label);
+            this.groupBox4.Controls.Add(this.d20Label);
+            this.groupBox4.Controls.Add(this.label27);
+            this.groupBox4.Controls.Add(this.label29);
+            this.groupBox4.Location = new System.Drawing.Point(6, 18);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox4.Size = new System.Drawing.Size(119, 66);
+            this.groupBox4.TabIndex = 11;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Cash in Dispenser";
+            // 
+            // dTotalLabel
+            // 
+            this.dTotalLabel.AutoSize = true;
+            this.dTotalLabel.Location = new System.Drawing.Point(42, 42);
+            this.dTotalLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.dTotalLabel.Name = "dTotalLabel";
+            this.dTotalLabel.Size = new System.Drawing.Size(0, 13);
+            this.dTotalLabel.TabIndex = 3;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(4, 42);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(34, 13);
+            this.label12.TabIndex = 3;
+            this.label12.Text = "Total:";
+            // 
+            // d10Label
+            // 
+            this.d10Label.AutoSize = true;
+            this.d10Label.Location = new System.Drawing.Point(39, 29);
+            this.d10Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.d10Label.Name = "d10Label";
+            this.d10Label.Size = new System.Drawing.Size(0, 13);
+            this.d10Label.TabIndex = 6;
+            // 
+            // d20Label
+            // 
+            this.d20Label.AutoSize = true;
+            this.d20Label.Location = new System.Drawing.Point(39, 15);
+            this.d20Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.d20Label.Name = "d20Label";
+            this.d20Label.Size = new System.Drawing.Size(0, 13);
+            this.d20Label.TabIndex = 7;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(4, 15);
+            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(28, 13);
+            this.label27.TabIndex = 6;
+            this.label27.Text = "$20:";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(4, 29);
+            this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(28, 13);
+            this.label29.TabIndex = 3;
+            this.label29.Text = "$10:";
+            // 
+            // r100Label
+            // 
+            this.r100Label.AutoSize = true;
+            this.r100Label.Location = new System.Drawing.Point(39, 15);
+            this.r100Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.r100Label.Name = "r100Label";
+            this.r100Label.Size = new System.Drawing.Size(0, 13);
+            this.r100Label.TabIndex = 9;
+            // 
+            // r50Label
+            // 
+            this.r50Label.AutoSize = true;
+            this.r50Label.Location = new System.Drawing.Point(39, 28);
+            this.r50Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.r50Label.Name = "r50Label";
+            this.r50Label.Size = new System.Drawing.Size(0, 13);
+            this.r50Label.TabIndex = 8;
+            // 
+            // r20Label
+            // 
+            this.r20Label.AutoSize = true;
+            this.r20Label.Location = new System.Drawing.Point(39, 42);
+            this.r20Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.r20Label.Name = "r20Label";
+            this.r20Label.Size = new System.Drawing.Size(0, 13);
+            this.r20Label.TabIndex = 7;
+            // 
+            // r10Label
+            // 
+            this.r10Label.AutoSize = true;
+            this.r10Label.Location = new System.Drawing.Point(39, 56);
+            this.r10Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.r10Label.Name = "r10Label";
+            this.r10Label.Size = new System.Drawing.Size(0, 13);
+            this.r10Label.TabIndex = 6;
+            // 
+            // r5Label
+            // 
+            this.r5Label.AutoSize = true;
+            this.r5Label.Location = new System.Drawing.Point(39, 70);
+            this.r5Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.r5Label.Name = "r5Label";
+            this.r5Label.Size = new System.Drawing.Size(0, 13);
+            this.r5Label.TabIndex = 5;
+            // 
+            // r1Label
+            // 
+            this.r1Label.AutoSize = true;
+            this.r1Label.Location = new System.Drawing.Point(39, 84);
+            this.r1Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.r1Label.Name = "r1Label";
+            this.r1Label.Size = new System.Drawing.Size(0, 13);
+            this.r1Label.TabIndex = 4;
+            // 
+            // rTotalLabel
+            // 
+            this.rTotalLabel.AutoSize = true;
+            this.rTotalLabel.Location = new System.Drawing.Point(42, 98);
+            this.rTotalLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.rTotalLabel.Name = "rTotalLabel";
+            this.rTotalLabel.Size = new System.Drawing.Size(0, 13);
+            this.rTotalLabel.TabIndex = 3;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(651, 366);
-            this.Controls.Add(this.newPersonButton);
+            this.ClientSize = new System.Drawing.Size(687, 366);
+            this.Controls.Add(this.workerButton);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.customerButton);
             this.Controls.Add(this.personGroup);
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
@@ -290,6 +573,11 @@
             this.personGroup.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -299,7 +587,7 @@
         private System.Windows.Forms.GroupBox personGroup;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label personLabel;
-        private System.Windows.Forms.Button newPersonButton;
+        private System.Windows.Forms.Button customerButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label oneLabel;
         private System.Windows.Forms.Label fiveLabel;
@@ -317,6 +605,30 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label totalLabel;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button workerButton;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label dTotalLabel;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label d10Label;
+        private System.Windows.Forms.Label d20Label;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label rTotalLabel;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label r1Label;
+        private System.Windows.Forms.Label r5Label;
+        private System.Windows.Forms.Label r10Label;
+        private System.Windows.Forms.Label r20Label;
+        private System.Windows.Forms.Label r50Label;
+        private System.Windows.Forms.Label r100Label;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
     }
 }
 

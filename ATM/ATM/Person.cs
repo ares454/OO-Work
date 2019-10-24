@@ -3,35 +3,77 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Collections;
+using System.IO;
 namespace ATM
 {
     abstract class Person 
     {
+        private static ArrayList nameList;
         protected Person() 
         {
+            Random r = new Random();
+            Name = (string)nameList[r.Next(nameList.Count)];
             cash = new Cash();
         }
         protected Cash cash;
-        Type type;
+        protected Type type;
         public Cash Cash { get { return cash; } protected set { cash = value; } }
         public enum Type { CUSTOMER, WORKER };
         public string PersonType => type == Type.CUSTOMER ? "Customer" : "Worker";
 
-        public string Name { get; set; }
+        public string Name { get; protected set; }
 
-        public static Person Randomize()
+        public static void LoadNames()
+        {
+            nameList = new ArrayList();
+
+            StreamReader r = new StreamReader("..\\..\\baby-names.csv");
+            while(!r.EndOfStream)
+            {
+                nameList.Add(r.ReadLine());
+            }
+
+
+            r.Close();
+        }
+
+        protected static Person Randomize()
         {
             Person p;
             Random r = new Random();
             if (r.Next(int.MaxValue) % 2 == 0)
                 p = Customer.Random();
             else
-                p = Customer.Random();
+                p = Worker.Random();
 
             return p;
         }
 
+
+        protected void FillWallet(int total)
+        {
+            Random r = new Random();
+
+            int hun, fif, twe, ten, fiv;
+
+            hun = r.Next(total / 100);
+            total -= hun * 100;
+
+            fif = r.Next(total / 50);
+            total -= fif * 50;
+
+            twe = r.Next(total / 20);
+            total -= twe * 20;
+
+            ten = r.Next(total / 10);
+            total -= ten * 10;
+
+            fiv = r.Next(total / 5);
+            total -= fiv * 5;
+
+            Cash += new Cash(hun, fif, twe, ten, fiv, total);
+        }
     }
 
     class Customer : Person
@@ -79,40 +121,28 @@ namespace ATM
         public Customer()
         {
             cash = new Cash();
+            type = Type.CUSTOMER;
         }
 
         private enum Wealth {Lower = 128, Middle = 2048, Upper = 32768}
 
-        private void FillWallet(int total)
-        {
-            Random r = new Random();
-
-            int hun, fif, twe, ten, fiv;
-
-            hun = r.Next(total / 100);
-            total -= hun * 100;
-
-            fif = r.Next(total / 50);
-            total -= fif * 50;
-
-            twe = r.Next(total / 20);
-            total -= twe * 20;
-
-            ten = r.Next(total / 10);
-            total -= ten * 10;
-
-            fiv = r.Next(total / 5);
-            total -= fiv * 5;
-
-            Cash += new Cash(hun, fif, twe, ten, fiv, total);
-        }
     }
 
     class Worker : Person
     {
         public static Worker Random()
         {
-            throw new NotImplementedException();
+            Random r = new Random();
+            Worker w = new Worker();
+            int cashTotal = r.Next(1000000);
+            w.FillWallet(cashTotal);
+
+            return w;
+        }
+
+        public Worker()
+        {
+            type = Type.WORKER;
         }
     }
 }
