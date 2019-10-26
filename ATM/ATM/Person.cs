@@ -9,17 +9,35 @@ namespace ATM
 {
     abstract class Person 
     {
-        private static ArrayList nameList;
+        protected static ArrayList nameList;
+        protected ArrayList checks;
+        public Check[] ChecksOnHand 
+        { get 
+            {
+                Check[] ret = new Check[checks.Count];
+                for (int i = 0; i < ret.Length; ++i)
+                    ret[i] = checks[i] as Check;
+                    
+                return ret; 
+            } 
+        }
+        protected string id;
+        protected Membership memShip;
+        public Membership Member { get { return memShip; } }
+        public string ID { get { return id; } }
         protected Person() 
         {
             Random r = new Random();
             Name = (string)nameList[r.Next(nameList.Count)];
             cash = new Cash();
+            memShip = new Membership(this);
+            id = memShip.ID;
+            checks = new ArrayList();
         }
         protected Cash cash;
         protected Type type;
         public Cash Cash { get { return cash; } protected set { cash = value; } }
-        public enum Type { CUSTOMER, WORKER };
+        protected enum Type { CUSTOMER, WORKER };
         public string PersonType => type == Type.CUSTOMER ? "Customer" : "Worker";
 
         public string Name { get; protected set; }
@@ -87,12 +105,12 @@ namespace ATM
             int val = r.Next() % 3;
             Wealth w = 0;
 
-            switch(val)
+            switch (val)
             {
                 case 0:
                     w = Wealth.Lower;
                     break;
-                case 1: 
+                case 1:
                     w = Wealth.Middle;
                     break;
                 case 2:
@@ -100,7 +118,22 @@ namespace ATM
                     break;
             }
 
-            switch(w)
+            cashTotal = RandomAmount(r, w);
+            c.FillWallet(cashTotal);
+
+            for (int i = 0; i <= val; ++i)
+            {
+                c.memShip.OpenAccount(RandomAmount(r, w));
+                c.checks.Add(new Check((string)nameList[r.Next(nameList.Count)], c.Name, RandomAmount(r, w)));
+            }
+
+            return c;
+        }
+
+        private static int RandomAmount(Random r, Wealth w)
+        {
+            int cashTotal = 0;
+            switch (w)
             {
                 case Wealth.Lower:
                     cashTotal = r.Next((int)Wealth.Lower);
@@ -113,9 +146,7 @@ namespace ATM
                     break;
             }
 
-            c.FillWallet(cashTotal);
-
-            return c;
+            return cashTotal;
         }
 
         public Customer()
@@ -125,7 +156,6 @@ namespace ATM
         }
 
         private enum Wealth {Lower = 128, Middle = 2048, Upper = 32768}
-
     }
 
     class Worker : Person
