@@ -21,13 +21,23 @@ namespace ATM
                 return ret; 
             } 
         }
+
+        public void TransferCash(Cash c)
+        {
+            cash -= c;
+        }
+
         protected string id;
         protected Membership memShip;
         public Membership Member { get { return memShip; } }
         public string ID { get { return id; } }
+        public void CollectCash(Cash c)
+        {
+            cash += c;
+        }
         protected Person() 
         {
-            Random r = new Random();
+            Random r = Form1.r;
             Name = (string)nameList[r.Next(nameList.Count)];
             cash = new Cash();
             memShip = new Membership(this);
@@ -59,7 +69,7 @@ namespace ATM
         protected static Person Randomize()
         {
             Person p;
-            Random r = new Random();
+            Random r = Form1.r;
             if (r.Next(int.MaxValue) % 2 == 0)
                 p = Customer.Random();
             else
@@ -71,7 +81,7 @@ namespace ATM
 
         protected void FillWallet(int total)
         {
-            Random r = new Random();
+            Random r = Form1.r;
 
             int hun, fif, twe, ten, fiv;
 
@@ -99,7 +109,7 @@ namespace ATM
         public static Person Random()
         {
             int cashTotal = 0;
-            Random r = new Random();
+            Random r = Form1.r;
             Customer c = new Customer();
 
             int val = r.Next() % 3;
@@ -162,7 +172,7 @@ namespace ATM
     {
         public static Worker Random()
         {
-            Random r = new Random();
+            Random r = Form1.r;
             Worker w = new Worker();
             int cashTotal = r.Next(1000000);
             w.FillWallet(cashTotal);

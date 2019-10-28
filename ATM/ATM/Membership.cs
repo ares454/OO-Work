@@ -31,7 +31,7 @@ namespace ATM
             Owner = p.Name;
             
             id = "";
-            Random r = new Random();
+            Random r = Form1.r;
 
             for(int i = 0; i < 9; i++)
                 id += (char)r.Next('0', '9' + 1);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace ATM
 {
@@ -24,28 +25,47 @@ namespace ATM
             if (tens > cash.Tens)
                 throw new Exception();
 
-            return new Cash(0, 0, twenties, tens, 0, 0);
+            Cash ret = new Cash(0, 0, twenties, tens, 0, 0);
+            cash -= ret;
+            return ret;
         }
         public Cash RemainingCash { get { return cash; } }
         public void TransferFromReceiver(Cash c)
         {
             cash += c;
         }
+
+        public Dispenser()
+        {
+            cash = new Cash(0, 0, 2500, 5000, 0, 0);
+        }
     }
 
     class Receiver
     {
         Cash cash;
+        ArrayList checks;
+
+        public Cash RemainingCash { get { return cash; } private set { cash = value; } }
 
         public Receiver()
         {
-            
+            cash = new Cash();
         }
+
+        public Cash Receive(Cash c)
+        {
+            cash += c;
+            return Process();
+        }
+
         //Add deposit cash to account
         //Returns cash to be transferred to dispoenser
-        public Cash Process(Cash c, Account a)
+        public Cash Process()
         {
-            return new Cash(0, 0, c.Twenties, c.Tens, 0, 0);
+            Cash ret = new Cash(0, 0, cash.Twenties, cash.Tens, 0, 0);
+            cash -= ret;
+            return ret;
         }
 
         //public void Process(Check c)

@@ -11,6 +11,7 @@ namespace ATM
     class ATM
     {
         private Dispenser dispenser;
+        private Receiver receiver;
         private static ATM atm;
         public static ATM GetInstance()
         {
@@ -20,8 +21,13 @@ namespace ATM
             return atm;
         }
 
+        private int curPage;
+        public int CurrentScreen { get { return curPage; } }
+        public Account CurrentAccount { get { return curAcc; } }
         Membership curMem;
         Account curAcc;
+
+        public Membership CurrentMembership => curMem;
         public bool Login(string id)
         {
             curMem = MembershipList.GetInstance()[id];
@@ -31,30 +37,52 @@ namespace ATM
                 return false;
             }
 
-            
+            curPage = curMem.MemType == Membership.Type.CUSTOMER ? 1 : 0;
 
             return true;
+        }
+
+        public void Logout() 
+        {
+            curPage = 0;
+            curMem = null;
+            curAcc = null;
         }
 
         public ATM()
         {
             dispenser = new Dispenser();
-
+            receiver = new Receiver();
+            curPage = 0;
         }
 
-        public Cash Dispense(int total)
+        public Cash Withdraw(int amt)
         {
-            try
+            if(amt > curAcc.Balance)
             {
-                return dispenser.Dispense(total);
+                MessageBox.Show("Account funds insufficient for withdraw amount.");
+                return null;
             }
-            catch (Exception)
+            else if(amt > dispenser.RemainingCash.Total)
             {
-                
+                MessageBox.Show("Machine has insuffient funds to release");
+                return null;
             }
 
-            return null;
+            curAcc.Withdraw(amt);
+
+            return dispenser.Dispense(amt);
         }
+
+        public void Deposit(Cash c)
+        {
+            Cash p = receiver.Receive(c);
+            curAcc.Deposit(c.Total);
+            dispenser.TransferFromReceiver(p);
+        }
+
+        public Cash CashInDispenser() { return dispenser.RemainingCash; }
+        public Cash CashInReceiver() { return receiver.RemainingCash; }
 
         private class MembershipList
         {
@@ -82,14 +110,19 @@ namespace ATM
                     return memberships[i];
                 }
             }
-            public void AddMembership(Membership m) { memberships.Add(m.ID, m); }
+            public void AddMembership(Membership m) {if(!memberships.ContainsKey(m.ID)) memberships.Add(m.ID, m); }
         }
            
-
+        public void SelectAccount(int i) { curAcc = curMem.GetAccount(i); }
         //Only for this example. Would not be in final implementation
         public void AddMembership(Membership m)
         {
             MembershipList.GetInstance().AddMembership(m);
+        }
+
+        //This was dumb. Designer kept looking here, so cheat I had to
+        internal class WithdrawButton : global::ATM.WithdrawButton
+        {
         }
     }
 }

@@ -10,12 +10,15 @@ namespace ATM
     {
 
         public string Number { get; }
-        public decimal Balance { get; }
+        public decimal Balance { get; private set; }
+
+        public void Withdraw(decimal amt) { Balance -= amt; }
+        public void Deposit(decimal amt) { Balance += amt; }
 
         public Account(decimal b)
         {
             Number = "";
-            Random r = new Random();
+            Random r = Form1.r;
             for (int i = 0; i < 9; ++i)
                 Number += (char)r.Next('0', '9' + 1);
 
