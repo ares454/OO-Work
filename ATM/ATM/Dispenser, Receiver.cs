@@ -35,6 +35,16 @@ namespace ATM
             cash += c;
         }
 
+        public Cash DispenseExtra()
+        {
+            int twenties = cash.Twenties - 2500 > 0 ? cash.Twenties - 2500 : 0;
+            int tens = cash.Tens - 5000 > 0 ? cash.Tens - 5000 : 0;
+
+            Cash ret = new Cash(0,0,twenties, tens, 0,0) ;
+            cash -= ret;
+            return ret;
+        }
+
         public Dispenser()
         {
             cash = new Cash(0, 0, 2500, 5000, 0, 0);
@@ -51,12 +61,42 @@ namespace ATM
         public Receiver()
         {
             cash = new Cash();
+            checks = new ArrayList();
+        }
+
+        public Cash ReturnCash()
+        {
+            Cash ret = cash;
+            cash = new Cash();
+            return ret;
         }
 
         public Cash Receive(Cash c)
         {
             cash += c;
             return Process();
+        }
+
+        public int Receive(Check c)
+        {
+            checks.Add(c);
+            return (int)c.Total;
+        }
+
+        public  Check[] ReturnChecks()
+        {
+            Check[] ret = ChecksInReceiver();
+
+            checks.Clear();
+            return ret;
+        }
+
+        public Check[] ChecksInReceiver()
+        {
+            Check[] ret = new Check[checks.Count];
+            for (int i = 0; i < ret.Length; ++i)
+                ret[i] = checks[i] as Check;
+            return ret;
         }
 
         //Add deposit cash to account

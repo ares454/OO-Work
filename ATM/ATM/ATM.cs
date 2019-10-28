@@ -74,11 +74,35 @@ namespace ATM
             return dispenser.Dispense(amt);
         }
 
-        public void Deposit(Cash c)
+        public void Deposit(Cash cash)
         {
-            Cash p = receiver.Receive(c);
-            curAcc.Deposit(c.Total);
+            Cash p = receiver.Receive(cash);
+            curAcc.Deposit(cash.Total);
             dispenser.TransferFromReceiver(p);
+        }
+
+        public void Deposit(Check[] checks)
+        {
+            foreach(Check c in checks)
+            {
+                int total = receiver.Receive(c);
+                curAcc.Deposit(total);
+            }
+        }
+
+        public Cash RetreiveCashDeposits()
+        {
+            if (curMem.MemType != Membership.Type.EMPLOYEE)
+                return new Cash();
+
+            Cash ret = receiver.ReturnCash();
+            ret += dispenser.DispenseExtra();
+            return ret;
+        }
+
+        public Check[] RetreiveCheckDeposits()
+        {
+            return receiver.ReturnChecks();
         }
 
         public Cash CashInDispenser() { return dispenser.RemainingCash; }
@@ -118,6 +142,12 @@ namespace ATM
         public void AddMembership(Membership m)
         {
             MembershipList.GetInstance().AddMembership(m);
+        }
+
+        //Only for this example. Would not be in final implementation
+        public Check[] CheckInfo()
+        {
+            return receiver.ChecksInReceiver();
         }
 
         //This was dumb. Designer kept looking here, so cheat I had to

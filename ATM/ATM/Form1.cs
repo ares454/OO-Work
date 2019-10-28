@@ -32,13 +32,16 @@ namespace ATM
             atMachine = Customer.Random();
             idInput.Text = atMachine.ID;
             FillPersonInfo();
+            ChangeTab(0);
         }
 
 
         private void workerButton_Click(object sender, EventArgs e)
         {
             atMachine = Worker.Random();
+            idInput.Text = atMachine.ID;
             FillPersonInfo();
+            ChangeTab(0);
         }
 
         private void idInput_KeyPress(object sender, KeyPressEventArgs e)
@@ -63,7 +66,10 @@ namespace ATM
             {
                 ChangeTab(ATM.GetInstance().CurrentScreen);
                 memShip = ATM.GetInstance().CurrentMembership;
-                SetUpAccountsPage();
+                if (atMachine is Customer)
+                    SetUpAccountsPage();
+                else
+                    ChangeTab(3);
             }
         }
 
@@ -82,7 +88,7 @@ namespace ATM
             totalLabel.Text = "$" + atMachine.Cash.Total;
 
             ATM.GetInstance().AddMembership(atMachine.Member);
-            Check[] checks = atMachine.ChecksOnHand;
+            Check[] checks = atMachine.ChecksOnHand();
             personChecks.Items.Clear();
 
 
@@ -139,11 +145,14 @@ namespace ATM
 
             r100Label.Text = rc.Hundreds.ToString();
             r50Label.Text = rc.Fifties.ToString();
-            r20Label.Text = rc.Twenties.ToString();
-            r10Label.Text = rc.Tens.ToString();
             r5Label.Text = rc.Fives.ToString();
             r1Label.Text = rc.Ones.ToString();
             rTotalLabel.Text = rc.Total.ToString();
+
+            machineChecks.Items.Clear();
+            Check[] checks = ATM.GetInstance().CheckInfo();
+            foreach (Check c in checks)
+                machineChecks.Items.Add(c);
         }
 
         #endregion
@@ -214,6 +223,40 @@ namespace ATM
             UpdateATMInfo();
             UpdateAccountInfo();
             FillPersonInfo();
+        }
+
+        private void depCheckButton_Click(object sender, EventArgs e)
+        {
+            Customer c = (Customer)atMachine;
+            ATM.GetInstance().Deposit(c.DepositChecks());
+            FillPersonInfo();
+            UpdateAccountInfo();
+            UpdateATMInfo();
+        }
+
+        private void refillMachineButtons_Click(object sender, EventArgs e)
+        {
+            ATM a = ATM.GetInstance();
+            Cash dc = a.CashInDispenser();
+            Worker w = atMachine as Worker;
+
+            Cash refillAmt = w.RefillAmount(dc);
+            a.Deposit(refillAmt);
+
+            FillPersonInfo();
+            UpdateATMInfo();
+        }
+
+        private void retreiveDepositsButton_Click(object sender, EventArgs e)
+        {
+            ATM a = ATM.GetInstance();
+            Worker w = atMachine as Worker;
+
+            w.CollectCash(a.RetreiveCashDeposits());
+            w.CollectChecks(a.RetreiveCheckDeposits());
+
+            FillPersonInfo();
+            UpdateATMInfo();
         }
     }
 }

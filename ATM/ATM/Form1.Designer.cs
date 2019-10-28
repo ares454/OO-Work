@@ -67,15 +67,11 @@
             this.rTotal = new System.Windows.Forms.Label();
             this.r1Label = new System.Windows.Forms.Label();
             this.r5Label = new System.Windows.Forms.Label();
-            this.r10Label = new System.Windows.Forms.Label();
-            this.r20Label = new System.Windows.Forms.Label();
             this.r50Label = new System.Windows.Forms.Label();
             this.r100Label = new System.Windows.Forms.Label();
             this.r1 = new System.Windows.Forms.Label();
             this.r5 = new System.Windows.Forms.Label();
-            this.r20 = new System.Windows.Forms.Label();
             this.r50 = new System.Windows.Forms.Label();
-            this.r10 = new System.Windows.Forms.Label();
             this.r100 = new System.Windows.Forms.Label();
             this.workerButton = new System.Windows.Forms.Button();
             this.loginBox = new System.Windows.Forms.GroupBox();
@@ -104,6 +100,10 @@
             this.label14 = new System.Windows.Forms.Label();
             this.depCashButton = new System.Windows.Forms.Button();
             this.depCheckButton = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.refillMachineButtons = new System.Windows.Forms.Button();
+            this.retreiveDepositsButton = new System.Windows.Forms.Button();
             this.personGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -116,6 +116,7 @@
             this.acountPage.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.custAmount)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // personGroup
@@ -393,7 +394,7 @@
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Location = new System.Drawing.Point(533, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(142, 349);
+            this.groupBox2.Size = new System.Drawing.Size(176, 349);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "ATM";
@@ -401,11 +402,12 @@
             // machineChecks
             // 
             this.machineChecks.BackColor = System.Drawing.SystemColors.Control;
+            this.machineChecks.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.machineChecks.FormattingEnabled = true;
-            this.machineChecks.Location = new System.Drawing.Point(6, 216);
+            this.machineChecks.Location = new System.Drawing.Point(6, 190);
             this.machineChecks.Name = "machineChecks";
             this.machineChecks.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.machineChecks.Size = new System.Drawing.Size(130, 121);
+            this.machineChecks.Size = new System.Drawing.Size(164, 143);
             this.machineChecks.TabIndex = 12;
             // 
             // groupBox4
@@ -420,7 +422,7 @@
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Size = new System.Drawing.Size(119, 66);
+            this.groupBox4.Size = new System.Drawing.Size(164, 66);
             this.groupBox4.TabIndex = 11;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Cash in Dispenser";
@@ -488,21 +490,17 @@
             this.groupBox3.Controls.Add(this.rTotal);
             this.groupBox3.Controls.Add(this.r1Label);
             this.groupBox3.Controls.Add(this.r5Label);
-            this.groupBox3.Controls.Add(this.r10Label);
-            this.groupBox3.Controls.Add(this.r20Label);
             this.groupBox3.Controls.Add(this.r50Label);
             this.groupBox3.Controls.Add(this.r100Label);
             this.groupBox3.Controls.Add(this.r1);
             this.groupBox3.Controls.Add(this.r5);
-            this.groupBox3.Controls.Add(this.r20);
             this.groupBox3.Controls.Add(this.r50);
-            this.groupBox3.Controls.Add(this.r10);
             this.groupBox3.Controls.Add(this.r100);
             this.groupBox3.Location = new System.Drawing.Point(6, 88);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(119, 123);
+            this.groupBox3.Size = new System.Drawing.Size(164, 99);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Cash in Receiver";
@@ -510,7 +508,7 @@
             // rTotalLabel
             // 
             this.rTotalLabel.AutoSize = true;
-            this.rTotalLabel.Location = new System.Drawing.Point(42, 98);
+            this.rTotalLabel.Location = new System.Drawing.Point(42, 69);
             this.rTotalLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.rTotalLabel.Name = "rTotalLabel";
             this.rTotalLabel.Size = new System.Drawing.Size(0, 13);
@@ -519,7 +517,7 @@
             // rTotal
             // 
             this.rTotal.AutoSize = true;
-            this.rTotal.Location = new System.Drawing.Point(4, 98);
+            this.rTotal.Location = new System.Drawing.Point(4, 69);
             this.rTotal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.rTotal.Name = "rTotal";
             this.rTotal.Size = new System.Drawing.Size(34, 13);
@@ -529,7 +527,7 @@
             // r1Label
             // 
             this.r1Label.AutoSize = true;
-            this.r1Label.Location = new System.Drawing.Point(39, 84);
+            this.r1Label.Location = new System.Drawing.Point(39, 55);
             this.r1Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.r1Label.Name = "r1Label";
             this.r1Label.Size = new System.Drawing.Size(0, 13);
@@ -538,29 +536,11 @@
             // r5Label
             // 
             this.r5Label.AutoSize = true;
-            this.r5Label.Location = new System.Drawing.Point(39, 70);
+            this.r5Label.Location = new System.Drawing.Point(39, 41);
             this.r5Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.r5Label.Name = "r5Label";
             this.r5Label.Size = new System.Drawing.Size(0, 13);
             this.r5Label.TabIndex = 5;
-            // 
-            // r10Label
-            // 
-            this.r10Label.AutoSize = true;
-            this.r10Label.Location = new System.Drawing.Point(39, 56);
-            this.r10Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.r10Label.Name = "r10Label";
-            this.r10Label.Size = new System.Drawing.Size(0, 13);
-            this.r10Label.TabIndex = 6;
-            // 
-            // r20Label
-            // 
-            this.r20Label.AutoSize = true;
-            this.r20Label.Location = new System.Drawing.Point(39, 42);
-            this.r20Label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.r20Label.Name = "r20Label";
-            this.r20Label.Size = new System.Drawing.Size(0, 13);
-            this.r20Label.TabIndex = 7;
             // 
             // r50Label
             // 
@@ -583,7 +563,7 @@
             // r1
             // 
             this.r1.AutoSize = true;
-            this.r1.Location = new System.Drawing.Point(4, 84);
+            this.r1.Location = new System.Drawing.Point(4, 55);
             this.r1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.r1.Name = "r1";
             this.r1.Size = new System.Drawing.Size(22, 13);
@@ -593,22 +573,12 @@
             // r5
             // 
             this.r5.AutoSize = true;
-            this.r5.Location = new System.Drawing.Point(4, 70);
+            this.r5.Location = new System.Drawing.Point(4, 41);
             this.r5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.r5.Name = "r5";
             this.r5.Size = new System.Drawing.Size(22, 13);
             this.r5.TabIndex = 5;
             this.r5.Text = "$5:";
-            // 
-            // r20
-            // 
-            this.r20.AutoSize = true;
-            this.r20.Location = new System.Drawing.Point(4, 42);
-            this.r20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.r20.Name = "r20";
-            this.r20.Size = new System.Drawing.Size(28, 13);
-            this.r20.TabIndex = 6;
-            this.r20.Text = "$20:";
             // 
             // r50
             // 
@@ -619,16 +589,6 @@
             this.r50.Size = new System.Drawing.Size(28, 13);
             this.r50.TabIndex = 7;
             this.r50.Text = "$50:";
-            // 
-            // r10
-            // 
-            this.r10.AutoSize = true;
-            this.r10.Location = new System.Drawing.Point(4, 56);
-            this.r10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.r10.Name = "r10";
-            this.r10.Size = new System.Drawing.Size(28, 13);
-            this.r10.TabIndex = 3;
-            this.r10.Text = "$10:";
             // 
             // r100
             // 
@@ -762,7 +722,9 @@
             this.atmScreen.Controls.Add(this.loginPage);
             this.atmScreen.Controls.Add(this.acountPage);
             this.atmScreen.Controls.Add(this.tabPage1);
+            this.atmScreen.Controls.Add(this.tabPage2);
             this.atmScreen.Location = new System.Drawing.Point(185, 12);
+            this.atmScreen.Multiline = true;
             this.atmScreen.Name = "atmScreen";
             this.atmScreen.SelectedIndex = 0;
             this.atmScreen.Size = new System.Drawing.Size(342, 320);
@@ -772,10 +734,10 @@
             // loginPage
             // 
             this.loginPage.Controls.Add(this.loginBox);
-            this.loginPage.Location = new System.Drawing.Point(4, 25);
+            this.loginPage.Location = new System.Drawing.Point(4, 49);
             this.loginPage.Name = "loginPage";
             this.loginPage.Padding = new System.Windows.Forms.Padding(3);
-            this.loginPage.Size = new System.Drawing.Size(334, 291);
+            this.loginPage.Size = new System.Drawing.Size(334, 267);
             this.loginPage.TabIndex = 0;
             this.loginPage.Text = "Login Screen";
             this.loginPage.UseVisualStyleBackColor = true;
@@ -806,10 +768,10 @@
             this.tabPage1.Controls.Add(this.custAmount);
             this.tabPage1.Controls.Add(this.label15);
             this.tabPage1.Controls.Add(this.accountInfo);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Location = new System.Drawing.Point(4, 49);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(334, 291);
+            this.tabPage1.Size = new System.Drawing.Size(334, 267);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Account Actions";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -964,12 +926,55 @@
             this.depCheckButton.TabIndex = 19;
             this.depCheckButton.Text = "Check";
             this.depCheckButton.UseVisualStyleBackColor = true;
+            this.depCheckButton.Click += new System.EventHandler(this.depCheckButton_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.retreiveDepositsButton);
+            this.tabPage2.Controls.Add(this.refillMachineButtons);
+            this.tabPage2.Controls.Add(this.label11);
+            this.tabPage2.Location = new System.Drawing.Point(4, 49);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(334, 267);
+            this.tabPage2.TabIndex = 3;
+            this.tabPage2.Text = "ATM Maintenance";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 22);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(43, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Options";
+            // 
+            // refillMachineButtons
+            // 
+            this.refillMachineButtons.Location = new System.Drawing.Point(9, 38);
+            this.refillMachineButtons.Name = "refillMachineButtons";
+            this.refillMachineButtons.Size = new System.Drawing.Size(103, 23);
+            this.refillMachineButtons.TabIndex = 1;
+            this.refillMachineButtons.Text = "Refill Machine";
+            this.refillMachineButtons.UseVisualStyleBackColor = true;
+            this.refillMachineButtons.Click += new System.EventHandler(this.refillMachineButtons_Click);
+            // 
+            // retreiveDepositsButton
+            // 
+            this.retreiveDepositsButton.Location = new System.Drawing.Point(9, 67);
+            this.retreiveDepositsButton.Name = "retreiveDepositsButton";
+            this.retreiveDepositsButton.Size = new System.Drawing.Size(103, 23);
+            this.retreiveDepositsButton.TabIndex = 2;
+            this.retreiveDepositsButton.Text = "Retreive Deposits";
+            this.retreiveDepositsButton.UseVisualStyleBackColor = true;
+            this.retreiveDepositsButton.Click += new System.EventHandler(this.retreiveDepositsButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 366);
+            this.ClientSize = new System.Drawing.Size(721, 366);
             this.Controls.Add(this.atmScreen);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.workerButton);
@@ -997,6 +1002,8 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.custAmount)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1038,15 +1045,11 @@
         private System.Windows.Forms.Label rTotal;
         private System.Windows.Forms.Label r1Label;
         private System.Windows.Forms.Label r5Label;
-        private System.Windows.Forms.Label r10Label;
-        private System.Windows.Forms.Label r20Label;
         private System.Windows.Forms.Label r50Label;
         private System.Windows.Forms.Label r100Label;
         private System.Windows.Forms.Label r1;
         private System.Windows.Forms.Label r5;
-        private System.Windows.Forms.Label r20;
         private System.Windows.Forms.Label r50;
-        private System.Windows.Forms.Label r10;
         private System.Windows.Forms.Label r100;
         private System.Windows.Forms.ListBox personChecks;
         private System.Windows.Forms.GroupBox loginBox;
@@ -1079,6 +1082,10 @@
         private System.Windows.Forms.Button depCheckButton;
         private System.Windows.Forms.Button depCashButton;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button retreiveDepositsButton;
+        private System.Windows.Forms.Button refillMachineButtons;
     }
 }
 

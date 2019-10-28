@@ -7,19 +7,17 @@ using System.Collections;
 using System.IO;
 namespace ATM
 {
-    abstract class Person 
+    abstract class Person
     {
         protected static ArrayList nameList;
         protected ArrayList checks;
-        public Check[] ChecksOnHand 
-        { get 
-            {
-                Check[] ret = new Check[checks.Count];
-                for (int i = 0; i < ret.Length; ++i)
-                    ret[i] = checks[i] as Check;
-                    
-                return ret; 
-            } 
+        public Check[] ChecksOnHand()
+        {
+            Check[] ret = new Check[checks.Count];
+            for (int i = 0; i < ret.Length; ++i)
+                ret[i] = checks[i] as Check;
+
+            return ret;
         }
 
         public void TransferCash(Cash c)
@@ -35,7 +33,7 @@ namespace ATM
         {
             cash += c;
         }
-        protected Person() 
+        protected Person()
         {
             Random r = Form1.r;
             Name = (string)nameList[r.Next(nameList.Count)];
@@ -57,7 +55,7 @@ namespace ATM
             nameList = new ArrayList();
 
             StreamReader r = new StreamReader("..\\..\\baby-names.csv");
-            while(!r.EndOfStream)
+            while (!r.EndOfStream)
             {
                 nameList.Add(r.ReadLine());
             }
@@ -159,13 +157,20 @@ namespace ATM
             return cashTotal;
         }
 
+        public Check[] DepositChecks()
+        {
+            Check[] ret = ChecksOnHand();
+            checks.Clear();
+            return ret;
+        }
+
         public Customer()
         {
             cash = new Cash();
             type = Type.CUSTOMER;
         }
 
-        private enum Wealth {Lower = 128, Middle = 2048, Upper = 32768}
+        private enum Wealth { Lower = 128, Middle = 2048, Upper = 32768 }
     }
 
     class Worker : Person
@@ -178,6 +183,28 @@ namespace ATM
             w.FillWallet(cashTotal);
 
             return w;
+        }
+
+        public void CollectChecks(Check[] collected)
+        {
+            foreach (Check c in collected)
+                checks.Add(c);
+        }
+
+        //Refill machine to 2500 twenties and 5000 tens
+        //Parameter: Cash in the dispenser
+        public Cash RefillAmount(Cash c)
+        {
+            int twenties = c.Twenties - 2500 < 0 ? -(c.Twenties - 2500) : 0;
+            int tens = c.Tens - 5000 < 0 ? -(c.Tens - 5000) : 0;
+
+            twenties = twenties - cash.Twenties > 0 ? cash.Twenties : twenties;
+            tens = tens - cash.Tens > 0 ? cash.Tens : tens;
+            
+            Cash ret = new Cash(0,0,twenties, tens, 0, 0);
+            cash -= ret;
+
+            return ret;
         }
 
         public Worker()
