@@ -11,6 +11,10 @@ namespace ATM
     {
         protected static ArrayList nameList;
         protected ArrayList checks;
+        protected string id;
+        protected Membership memShip;
+        protected Cash cash;
+        protected Type type;
         public Check[] ChecksOnHand()
         {
             Check[] ret = new Check[checks.Count];
@@ -20,19 +24,20 @@ namespace ATM
             return ret;
         }
 
+        //For deposit
         public void TransferCash(Cash c)
         {
             cash -= c;
         }
 
-        protected string id;
-        protected Membership memShip;
-        public Membership Member { get { return memShip; } }
-        public string ID { get { return id; } }
+        //For withdrawl
         public void CollectCash(Cash c)
         {
             cash += c;
         }
+
+        public Membership Member { get { return memShip; } }
+        public string ID { get { return id; } }
         protected Person()
         {
             Random r = Form1.r;
@@ -42,14 +47,14 @@ namespace ATM
             id = memShip.ID;
             checks = new ArrayList();
         }
-        protected Cash cash;
-        protected Type type;
         public Cash Cash { get { return cash; } protected set { cash = value; } }
         protected enum Type { CUSTOMER, WORKER };
+
         public string PersonType => type == Type.CUSTOMER ? "Customer" : "Worker";
 
         public string Name { get; protected set; }
 
+        #region Setup
         public static void LoadNames()
         {
             nameList = new ArrayList();
@@ -100,6 +105,7 @@ namespace ATM
 
             Cash += new Cash(hun, fif, twe, ten, fiv, total);
         }
+        #endregion
     }
 
     class Customer : Person
@@ -193,7 +199,7 @@ namespace ATM
 
         //Refill machine to 2500 twenties and 5000 tens
         //Parameter: Cash in the dispenser
-        public Cash RefillAmount(Cash c)
+        public Cash RefillATM(Cash c)
         {
             int twenties = c.Twenties - 2500 < 0 ? -(c.Twenties - 2500) : 0;
             int tens = c.Tens - 5000 < 0 ? -(c.Tens - 5000) : 0;

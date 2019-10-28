@@ -10,10 +10,16 @@ namespace ATM
 {
     class ATM
     {
+        #region attributes
         private Dispenser dispenser;
         private Receiver receiver;
         private Printer printer;
+        private int curPage;
+        Membership curMem;
+        Account curAcc;
+        #endregion
 
+        #region
         private static ATM atm;
         public static ATM GetInstance()
         {
@@ -23,13 +29,22 @@ namespace ATM
             return atm;
         }
 
-        private int curPage;
         public int CurrentScreen { get { return curPage; } }
         public Account CurrentAccount { get { return curAcc; } }
-        Membership curMem;
-        Account curAcc;
+        public ATM()
+        {
+            dispenser = new Dispenser();
+            receiver = new Receiver();
+            printer = new Printer();
+            curPage = 0;
+        }
+        public void ChangeAccount()
+        {
+            curPage = 1;
+        }
 
         public Membership CurrentMembership => curMem;
+        #endregion
         public bool Login(string id)
         {
             curMem = MembershipList.GetInstance()[id];
@@ -51,13 +66,6 @@ namespace ATM
             curAcc = null;
         }
 
-        public ATM()
-        {
-            dispenser = new Dispenser();
-            receiver = new Receiver();
-            printer = new Printer();
-            curPage = 0;
-        }
 
         public Cash Withdraw(int amt)
         {
@@ -86,16 +94,12 @@ namespace ATM
             Cash p = receiver.Receive(cash);
             if(curMem.MemType == Membership.Type.CUSTOMER)
                 curAcc.Deposit(cash.Total);
-            dispenser.TransferFromReceiver(p);
+            dispenser.ReceiveFromReceiver(p);
             printer.Print(curMem, curAcc, cash, null, curMem.MemType == Membership.Type.CUSTOMER ? Printer.Configuration.PRINT_DEPOSIT : Printer.Configuration.PRINT_REFILL);
             Logout();
 
         }
 
-        public void ChangeAccount()
-        {
-            curPage = 1;
-        }
 
         public void Deposit(Check[] checks)
         {
@@ -115,7 +119,7 @@ namespace ATM
                 return new Cash();
 
             Cash ret = receiver.ReturnCash();
-            ret += dispenser.DispenseExtra();
+            ret += dispenser.Reset();
 
             printer.Print(curMem, null, ret, receiver.ChecksInReceiver(), Printer.Configuration.PRINT_CLEAR);
             return ret;
@@ -127,6 +131,7 @@ namespace ATM
             return receiver.ReturnChecks();
         }
 
+        #region
         public Cash CashInDispenser() { return dispenser.RemainingCash; }
         public Cash CashInReceiver() { return receiver.RemainingCash; }
 
@@ -176,5 +181,6 @@ namespace ATM
         internal class WithdrawButton : global::ATM.WithdrawButton
         {
         }
+        #endregion
     }
 }

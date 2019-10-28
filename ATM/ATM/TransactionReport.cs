@@ -18,7 +18,7 @@ namespace ATM
             membershipID = memID;
         }
 
-        public string[] ToArray(ArrayList list)
+        private string[] ToArray(ArrayList list)
         {
             string[] lines = new string[list.Count];
             for (int i = 0; i < list.Count; ++i)

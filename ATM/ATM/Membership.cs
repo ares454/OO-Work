@@ -10,13 +10,13 @@ namespace ATM
     class Membership
     {
         string id;
-
+        ArrayList accounts = new ArrayList();
         public string Owner { get; }
+
         public enum Type { CUSTOMER, EMPLOYEE };
         public Type MemType { get; }
 
         public string ID { get { return id; } }
-        ArrayList accounts = new ArrayList();
         public int NumberOfAccounts { get { return accounts.Count; } }
         public Account GetAccount(int i)
         {
@@ -24,7 +24,6 @@ namespace ATM
                 return null;
             return accounts[i] as Account;
         }
-
 
         public Membership(Person p)
         {

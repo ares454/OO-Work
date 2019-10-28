@@ -237,7 +237,7 @@ namespace ATM
             Cash dc = a.CashInDispenser();
             Worker w = atMachine as Worker;
 
-            Cash refillAmt = w.RefillAmount(dc);
+            Cash refillAmt = w.RefillATM(dc);
             a.Deposit(refillAmt);
 
             FillPersonInfo();

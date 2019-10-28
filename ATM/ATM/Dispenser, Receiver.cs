@@ -30,12 +30,12 @@ namespace ATM
             return ret;
         }
         public Cash RemainingCash { get { return cash; } }
-        public void TransferFromReceiver(Cash c)
+        public void ReceiveFromReceiver(Cash c)
         {
             cash += c;
         }
 
-        public Cash DispenseExtra()
+        public Cash Reset()
         {
             int twenties = cash.Twenties - 2500 > 0 ? cash.Twenties - 2500 : 0;
             int tens = cash.Tens - 5000 > 0 ? cash.Tens - 5000 : 0;
@@ -55,6 +55,15 @@ namespace ATM
     {
         Cash cash;
         ArrayList checks;
+
+        //Add deposit cash to account
+        //Returns cash to be transferred to dispoenser
+        private Cash Process()
+        {
+            Cash ret = new Cash(0, 0, cash.Twenties, cash.Tens, 0, 0);
+            cash -= ret;
+            return ret;
+        }
 
         public Cash RemainingCash { get { return cash; } private set { cash = value; } }
 
@@ -99,15 +108,5 @@ namespace ATM
             return ret;
         }
 
-        //Add deposit cash to account
-        //Returns cash to be transferred to dispoenser
-        public Cash Process()
-        {
-            Cash ret = new Cash(0, 0, cash.Twenties, cash.Tens, 0, 0);
-            cash -= ret;
-            return ret;
-        }
-
-        //public void Process(Check c)
     }
 }
