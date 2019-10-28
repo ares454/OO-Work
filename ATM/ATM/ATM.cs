@@ -12,6 +12,8 @@ namespace ATM
     {
         private Dispenser dispenser;
         private Receiver receiver;
+        private Printer printer;
+
         private static ATM atm;
         public static ATM GetInstance()
         {
@@ -37,7 +39,7 @@ namespace ATM
                 return false;
             }
 
-            curPage = curMem.MemType == Membership.Type.CUSTOMER ? 1 : 0;
+            curPage = curMem.MemType == Membership.Type.CUSTOMER ? 1 : 3;
 
             return true;
         }
@@ -53,6 +55,7 @@ namespace ATM
         {
             dispenser = new Dispenser();
             receiver = new Receiver();
+            printer = new Printer();
             curPage = 0;
         }
 
@@ -71,14 +74,27 @@ namespace ATM
 
             curAcc.Withdraw(amt);
 
-            return dispenser.Dispense(amt);
+            Cash cash = dispenser.Dispense(amt);
+            printer.Print(curMem, curAcc, cash, null, Printer.Configuration.PRINT_WITHDRAWL);
+            Logout();
+
+            return cash;
         }
 
         public void Deposit(Cash cash)
         {
             Cash p = receiver.Receive(cash);
-            curAcc.Deposit(cash.Total);
+            if(curMem.MemType == Membership.Type.CUSTOMER)
+                curAcc.Deposit(cash.Total);
             dispenser.TransferFromReceiver(p);
+            printer.Print(curMem, curAcc, cash, null, curMem.MemType == Membership.Type.CUSTOMER ? Printer.Configuration.PRINT_DEPOSIT : Printer.Configuration.PRINT_REFILL);
+            Logout();
+
+        }
+
+        public void ChangeAccount()
+        {
+            curPage = 1;
         }
 
         public void Deposit(Check[] checks)
@@ -88,6 +104,9 @@ namespace ATM
                 int total = receiver.Receive(c);
                 curAcc.Deposit(total);
             }
+
+            printer.Print(curMem, curAcc, null, checks, Printer.Configuration.PRINT_DEPOSIT);
+            Logout();
         }
 
         public Cash RetreiveCashDeposits()
@@ -97,11 +116,14 @@ namespace ATM
 
             Cash ret = receiver.ReturnCash();
             ret += dispenser.DispenseExtra();
+
+            printer.Print(curMem, null, ret, receiver.ChecksInReceiver(), Printer.Configuration.PRINT_CLEAR);
             return ret;
         }
 
         public Check[] RetreiveCheckDeposits()
         {
+            Logout();
             return receiver.ReturnChecks();
         }
 
@@ -137,7 +159,7 @@ namespace ATM
             public void AddMembership(Membership m) {if(!memberships.ContainsKey(m.ID)) memberships.Add(m.ID, m); }
         }
            
-        public void SelectAccount(int i) { curAcc = curMem.GetAccount(i); }
+        public void SelectAccount(int i) { curPage = 2; curAcc = curMem.GetAccount(i); }
         //Only for this example. Would not be in final implementation
         public void AddMembership(Membership m)
         {

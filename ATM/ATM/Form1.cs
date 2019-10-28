@@ -15,11 +15,9 @@ namespace ATM
         public static Random r = new Random();
         Person atMachine;
         bool changeTab = false;
-        int currTab = 0;
 
         //Need this for screen setup. Form deals with controls, not ATM
         private Membership memShip;
-        string id;
         public Form1()
         {
             InitializeComponent();
@@ -27,51 +25,6 @@ namespace ATM
             UpdateATMInfo();
         }
 
-        private void newPersonButton_Click(object sender, EventArgs e)
-        {
-            atMachine = Customer.Random();
-            idInput.Text = atMachine.ID;
-            FillPersonInfo();
-            ChangeTab(0);
-        }
-
-
-        private void workerButton_Click(object sender, EventArgs e)
-        {
-            atMachine = Worker.Random();
-            idInput.Text = atMachine.ID;
-            FillPersonInfo();
-            ChangeTab(0);
-        }
-
-        private void idInput_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (idInput.TextLength < 9 && e.KeyChar >= '0' && e.KeyChar <= '9')
-            {
-                string text = idInput.Text.Replace("_", "");
-                text += e.KeyChar;
-                int count = text.Length;
-
-                idInput.Text = text;
-            }
-            else if (e.KeyChar == '\b')
-                idInput.Text = idInput.Text.Remove(idInput.Text.Length - 1);
-
-                e.Handled = true;
-        }
-
-        private void loginButton_Click(object sender, EventArgs e)
-        {
-            if (ATM.GetInstance().Login(idInput.Text))
-            {
-                ChangeTab(ATM.GetInstance().CurrentScreen);
-                memShip = ATM.GetInstance().CurrentMembership;
-                if (atMachine is Customer)
-                    SetUpAccountsPage();
-                else
-                    ChangeTab(3);
-            }
-        }
 
         #region EZ Detail Set Up
         private void FillPersonInfo()
@@ -125,6 +78,7 @@ namespace ATM
         {
             changeTab = true;
             atmScreen.SelectedIndex = index;
+            custAmount.Value = custAmount.Minimum;
         }
 
         private void UpdateAccountInfo()
@@ -157,6 +111,53 @@ namespace ATM
 
         #endregion
 
+
+        #region ATM Controls
+        private void newPersonButton_Click(object sender, EventArgs e)
+        {
+            atMachine = Customer.Random();
+            idInput.Text = atMachine.ID;
+            FillPersonInfo();
+            ChangeTab(0);
+        }
+
+
+        private void workerButton_Click(object sender, EventArgs e)
+        {
+            atMachine = Worker.Random();
+            idInput.Text = atMachine.ID;
+            FillPersonInfo();
+            ChangeTab(0);
+        }
+
+        private void idInput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (idInput.TextLength < 9 && e.KeyChar >= '0' && e.KeyChar <= '9')
+            {
+                string text = idInput.Text.Replace("_", "");
+                text += e.KeyChar;
+                int count = text.Length;
+
+                idInput.Text = text;
+            }
+            else if (e.KeyChar == '\b')
+                idInput.Text = idInput.Text.Remove(idInput.Text.Length - 1);
+
+                e.Handled = true;
+        }
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            if (ATM.GetInstance().Login(idInput.Text))
+            {
+                ChangeTab(ATM.GetInstance().CurrentScreen);
+                memShip = ATM.GetInstance().CurrentMembership;
+                if (atMachine is Customer)
+                    SetUpAccountsPage();
+                else
+                    ChangeTab(3);
+            }
+        }
         private void atmScreen_Selecting(object sender, TabControlCancelEventArgs e)
         {
             if (!changeTab)
@@ -169,11 +170,8 @@ namespace ATM
         {
             ATM.GetInstance().Logout();
             logoutButton.Visible = false;
-            changeTab = true;
             ChangeTab(ATM.GetInstance().CurrentScreen);
         }
-
-        #region Customer Account Methods
 
         private void withdrawButton_Click(object sender, EventArgs e)
         {
@@ -183,29 +181,29 @@ namespace ATM
             {
                 atMachine.CollectCash(c);
                 FillPersonInfo();
-                UpdateAccountInfo();
                 UpdateATMInfo();
+                ChangeTab(ATM.GetInstance().CurrentScreen);
             }
         }
 
         private void chkButton_Click(object sender, EventArgs e)
         {
             ATM.GetInstance().SelectAccount(0);
-            ChangeTab(2);
+            ChangeTab(ATM.GetInstance().CurrentScreen);
             UpdateAccountInfo();
         }
 
         private void savButton_Click(object sender, EventArgs e)
         {
             ATM.GetInstance().SelectAccount(1);
-            ChangeTab(2);
+            ChangeTab(ATM.GetInstance().CurrentScreen);
             UpdateAccountInfo();
         }
 
         private void invButton_Click(object sender, EventArgs e)
         {
             ATM.GetInstance().SelectAccount(2);
-            ChangeTab(2);
+            ChangeTab(ATM.GetInstance().CurrentScreen);
             UpdateAccountInfo();
         }
 
@@ -214,15 +212,14 @@ namespace ATM
             wdCust.Text = $"${custAmount.Value}";
             wdCust.Amount = (int)custAmount.Value;
         }
-        #endregion
 
         private void depCashButton_Click(object sender, EventArgs e)
         {
             ATM.GetInstance().Deposit(atMachine.Cash);
             atMachine.TransferCash(atMachine.Cash);
             UpdateATMInfo();
-            UpdateAccountInfo();
             FillPersonInfo();
+            ChangeTab(ATM.GetInstance().CurrentScreen);
         }
 
         private void depCheckButton_Click(object sender, EventArgs e)
@@ -230,8 +227,8 @@ namespace ATM
             Customer c = (Customer)atMachine;
             ATM.GetInstance().Deposit(c.DepositChecks());
             FillPersonInfo();
-            UpdateAccountInfo();
             UpdateATMInfo();
+            ChangeTab(ATM.GetInstance().CurrentScreen);
         }
 
         private void refillMachineButtons_Click(object sender, EventArgs e)
@@ -245,6 +242,7 @@ namespace ATM
 
             FillPersonInfo();
             UpdateATMInfo();
+            ChangeTab(ATM.GetInstance().CurrentScreen);
         }
 
         private void retreiveDepositsButton_Click(object sender, EventArgs e)
@@ -257,6 +255,17 @@ namespace ATM
 
             FillPersonInfo();
             UpdateATMInfo();
+            ChangeTab(ATM.GetInstance().CurrentScreen);
         }
+
+        private void changeAccountButton_Click(object sender, EventArgs e)
+        {
+            ATM.GetInstance().ChangeAccount();
+            ChangeTab(ATM.GetInstance().CurrentScreen);
+            memShip = ATM.GetInstance().CurrentMembership;
+            SetUpAccountsPage();
+        }
+
+        #endregion  
     }
 }

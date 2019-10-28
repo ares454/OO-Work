@@ -87,6 +87,10 @@
             this.loginPage = new System.Windows.Forms.TabPage();
             this.acountPage = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.changeAccountButton = new System.Windows.Forms.Button();
+            this.depCheckButton = new System.Windows.Forms.Button();
+            this.depCashButton = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
             this.wdCust = new ATM.WithdrawButton();
             this.wd200 = new ATM.WithdrawButton();
             this.wd100 = new ATM.WithdrawButton();
@@ -97,13 +101,10 @@
             this.custAmount = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
             this.accountInfo = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.depCashButton = new System.Windows.Forms.Button();
-            this.depCheckButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label11 = new System.Windows.Forms.Label();
-            this.refillMachineButtons = new System.Windows.Forms.Button();
             this.retreiveDepositsButton = new System.Windows.Forms.Button();
+            this.refillMachineButtons = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
             this.personGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -745,16 +746,17 @@
             // acountPage
             // 
             this.acountPage.Controls.Add(this.accountBox);
-            this.acountPage.Location = new System.Drawing.Point(4, 25);
+            this.acountPage.Location = new System.Drawing.Point(4, 49);
             this.acountPage.Name = "acountPage";
             this.acountPage.Padding = new System.Windows.Forms.Padding(3);
-            this.acountPage.Size = new System.Drawing.Size(334, 291);
+            this.acountPage.Size = new System.Drawing.Size(334, 267);
             this.acountPage.TabIndex = 1;
             this.acountPage.Text = "Customer Account Selection";
             this.acountPage.UseVisualStyleBackColor = true;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.changeAccountButton);
             this.tabPage1.Controls.Add(this.depCheckButton);
             this.tabPage1.Controls.Add(this.depCashButton);
             this.tabPage1.Controls.Add(this.label14);
@@ -775,6 +777,45 @@
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Account Actions";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // changeAccountButton
+            // 
+            this.changeAccountButton.Location = new System.Drawing.Point(229, 6);
+            this.changeAccountButton.Name = "changeAccountButton";
+            this.changeAccountButton.Size = new System.Drawing.Size(99, 23);
+            this.changeAccountButton.TabIndex = 20;
+            this.changeAccountButton.Text = "Change Account";
+            this.changeAccountButton.UseVisualStyleBackColor = true;
+            this.changeAccountButton.Click += new System.EventHandler(this.changeAccountButton_Click);
+            // 
+            // depCheckButton
+            // 
+            this.depCheckButton.Location = new System.Drawing.Point(248, 83);
+            this.depCheckButton.Name = "depCheckButton";
+            this.depCheckButton.Size = new System.Drawing.Size(75, 23);
+            this.depCheckButton.TabIndex = 19;
+            this.depCheckButton.Text = "Check";
+            this.depCheckButton.UseVisualStyleBackColor = true;
+            this.depCheckButton.Click += new System.EventHandler(this.depCheckButton_Click);
+            // 
+            // depCashButton
+            // 
+            this.depCashButton.Location = new System.Drawing.Point(248, 54);
+            this.depCashButton.Name = "depCashButton";
+            this.depCashButton.Size = new System.Drawing.Size(75, 23);
+            this.depCashButton.TabIndex = 18;
+            this.depCashButton.Text = "Cash";
+            this.depCashButton.UseVisualStyleBackColor = true;
+            this.depCashButton.Click += new System.EventHandler(this.depCashButton_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(245, 38);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(57, 13);
+            this.label14.TabIndex = 17;
+            this.label14.Text = "Deposit by";
             // 
             // wdCust
             // 
@@ -899,35 +940,6 @@
             this.accountInfo.TabIndex = 0;
             this.accountInfo.Text = "Account# ";
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(245, 38);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(57, 13);
-            this.label14.TabIndex = 17;
-            this.label14.Text = "Deposit by";
-            // 
-            // depCashButton
-            // 
-            this.depCashButton.Location = new System.Drawing.Point(248, 54);
-            this.depCashButton.Name = "depCashButton";
-            this.depCashButton.Size = new System.Drawing.Size(75, 23);
-            this.depCashButton.TabIndex = 18;
-            this.depCashButton.Text = "Cash";
-            this.depCashButton.UseVisualStyleBackColor = true;
-            this.depCashButton.Click += new System.EventHandler(this.depCashButton_Click);
-            // 
-            // depCheckButton
-            // 
-            this.depCheckButton.Location = new System.Drawing.Point(248, 83);
-            this.depCheckButton.Name = "depCheckButton";
-            this.depCheckButton.Size = new System.Drawing.Size(75, 23);
-            this.depCheckButton.TabIndex = 19;
-            this.depCheckButton.Text = "Check";
-            this.depCheckButton.UseVisualStyleBackColor = true;
-            this.depCheckButton.Click += new System.EventHandler(this.depCheckButton_Click);
-            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.retreiveDepositsButton);
@@ -941,14 +953,15 @@
             this.tabPage2.Text = "ATM Maintenance";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label11
+            // retreiveDepositsButton
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 22);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(43, 13);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "Options";
+            this.retreiveDepositsButton.Location = new System.Drawing.Point(9, 67);
+            this.retreiveDepositsButton.Name = "retreiveDepositsButton";
+            this.retreiveDepositsButton.Size = new System.Drawing.Size(103, 23);
+            this.retreiveDepositsButton.TabIndex = 2;
+            this.retreiveDepositsButton.Text = "Retreive Deposits";
+            this.retreiveDepositsButton.UseVisualStyleBackColor = true;
+            this.retreiveDepositsButton.Click += new System.EventHandler(this.retreiveDepositsButton_Click);
             // 
             // refillMachineButtons
             // 
@@ -960,15 +973,14 @@
             this.refillMachineButtons.UseVisualStyleBackColor = true;
             this.refillMachineButtons.Click += new System.EventHandler(this.refillMachineButtons_Click);
             // 
-            // retreiveDepositsButton
+            // label11
             // 
-            this.retreiveDepositsButton.Location = new System.Drawing.Point(9, 67);
-            this.retreiveDepositsButton.Name = "retreiveDepositsButton";
-            this.retreiveDepositsButton.Size = new System.Drawing.Size(103, 23);
-            this.retreiveDepositsButton.TabIndex = 2;
-            this.retreiveDepositsButton.Text = "Retreive Deposits";
-            this.retreiveDepositsButton.UseVisualStyleBackColor = true;
-            this.retreiveDepositsButton.Click += new System.EventHandler(this.retreiveDepositsButton_Click);
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 22);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(43, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Options";
             // 
             // Form1
             // 
@@ -982,6 +994,7 @@
             this.Controls.Add(this.customerButton);
             this.Controls.Add(this.personGroup);
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
             this.personGroup.ResumeLayout(false);
@@ -1072,13 +1085,6 @@
         private System.Windows.Forms.Label accountInfo;
         private System.Windows.Forms.NumericUpDown custAmount;
         private System.Windows.Forms.Label label15;
-        private WithdrawButton wdCust;
-        private WithdrawButton wd200;
-        private WithdrawButton wd100;
-        private WithdrawButton wd80;
-        private WithdrawButton wd60;
-        private WithdrawButton wd40;
-        private WithdrawButton wd20;
         private System.Windows.Forms.Button depCheckButton;
         private System.Windows.Forms.Button depCashButton;
         private System.Windows.Forms.Label label14;
@@ -1086,6 +1092,14 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button retreiveDepositsButton;
         private System.Windows.Forms.Button refillMachineButtons;
+        private System.Windows.Forms.Button changeAccountButton;
+        private WithdrawButton wdCust;
+        private WithdrawButton wd200;
+        private WithdrawButton wd100;
+        private WithdrawButton wd80;
+        private WithdrawButton wd60;
+        private WithdrawButton wd40;
+        private WithdrawButton wd20;
     }
 }
 
